@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-validation-staging-54955-authRole",
+      "UnauthRoleArn": "arn:aws:iam::067039021377:role/amplify-validation-staging-54955-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::067039021377:role/amplify-validation-staging-54955-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-validation-staging-54955-deployment",
+      "UnauthRoleName": "amplify-validation-staging-54955-unauthRole",
+      "StackName": "amplify-validation-staging-54955",
+      "StackId": "arn:aws:cloudformation:us-east-1:067039021377:stack/amplify-validation-staging-54955/6a501770-22a7-11ed-912e-0a63acae08ed",
+      "AmplifyAppId": "d1mrhzil0h260q"
+    },
+    "categories": {
+      "auth": {
+        "Validation": {}
+      }
+    }
+  }
+}

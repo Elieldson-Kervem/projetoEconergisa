@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "421565698067",
+    "project_id": "econergisa-data-base",
+    "storage_bucket": "econergisa-data-base.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:421565698067:android:eecc68dfdbaca487576fe6",
+        "android_client_info": {
+          "package_name": "com.econergisa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "421565698067-46fot1lp21d5jv8gflah4dj08l10birp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDH13JWJIYg--TrWd6OLWMIML149A6vlgM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "421565698067-46fot1lp21d5jv8gflah4dj08l10birp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
