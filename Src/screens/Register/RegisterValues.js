@@ -14,6 +14,7 @@ const CustomImput2 = ({
     <Controller
       control={control}
       name={name}
+      
       rules={rules}
       render={({
         field: { value, onChange, onBlur },

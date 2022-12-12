@@ -13,7 +13,7 @@ const CustomImput=({control,name,placeholder,secureTextEntry,rules={}})=>{
            <Controller 
            control={control}
            
-           
+            
             name={name} 
             rules={rules}
             render={({field:{value,onChange,onBlur},fieldState:{error}})=>

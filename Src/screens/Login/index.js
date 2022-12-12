@@ -7,6 +7,8 @@ import CustomImput from "./loginValues";
 import {useForm,Controller} from 'react-hook-form'
 import {useNavigation} from "@react-navigation/native"
 import { Auth } from "aws-amplify";
+
+
 const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 const Login = () => {
   
@@ -20,9 +22,9 @@ const Login = () => {
     }
      setLoading(true);
     try {
-      const response = await Auth.signIn(data.username, data.password)
-    console.log(response);
-    } catch (error) {
+      await Auth.signIn(data.username, data.password)
+      navigation.navigate('Main')
+     } catch (error) {
        alert(`opps ${error.message}`)
     }
     setLoading(false)
@@ -41,8 +43,8 @@ const Login = () => {
         </Text>
  
      
-     
-       <CustomImput rules={{required:'O email do usuario é obrigatorio',minLength:{value:10,message:'Email deve ter no minimo 10 caracteres'},pattern:{value:reg,message:'email invalido'}}} placeholder="digite seu email" name="username" control={control}  placeholderTextColor="#fff"></CustomImput>
+            <CustomImput  placeholder="digite seu nome de usuario" name="username" control={control}  placeholderTextColor="#fff"></CustomImput>
+
        
        <CustomImput rules={{required:"A senha do usuario é obrigatorio",minLength:{value:6,message:'Senha  deve ter no minimo 6 caracteres'}}} placeholder="digite sua senha" name="password" control={control}  placeholderTextColor="#fff" secureTextEntry={true}></CustomImput>
 

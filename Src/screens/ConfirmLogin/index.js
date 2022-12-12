@@ -16,12 +16,29 @@ const image = require("../../loginImg/loginBackground.png");
 import CustomImput3 from "./RegisterValues";
 import {useNavigation} from "@react-navigation/native"
 import {useForm,Controller} from 'react-hook-form'
+import { useRoute } from "@react-navigation/native";
+import { Auth } from "aws-amplify";
 
 
 
 const ConfirmLogin = () => {
+  const route=useRoute()
   const navigation=useNavigation()
-  const {control,handleSubmit,formState:{errors}, watch}= useForm();
+  const {control,handleSubmit,formState:{errors}, watch}= useForm({
+    defaultValues:{
+      username:route?.params?.username
+    }
+  });
+
+  const onConfirmIsPressed= async(data)=>{
+        try {
+          await Auth.confirmSignUp(data.username,data.code)
+          navigation.navigate('Login')
+        } catch (error) {
+          alert(error)
+          
+        }
+  }
  
 
 
@@ -42,14 +59,16 @@ const ConfirmLogin = () => {
          
             Venha criar uma conta conosco e comece a economizar
           </Text>
-          <CustomImput3 rules={{required:'Confime o codigo enviado para seu email',minLength:{value:6,message:'Condigo tem 6 digitos'} }}  placeholder="Confime o codigo enviado para seu email" name="emailCode" control={control}  placeholderTextColor="#fff"></CustomImput3>
+          <CustomImput3  name="username" control={control}  placeholderTextColor="#fff" placeholder={''}></CustomImput3>
+
+          <CustomImput3 rules={{required:'Confime o codigo enviado para seu email',minLength:{value:6,message:'Condigo tem 6 digitos'} }}  placeholder="Confime o seu email " name="code" control={control}  placeholderTextColor="#fff"></CustomImput3>
       
             
             <CustomButton  type='secundary' text='Volte para a pagina de login'></CustomButton>
             <CustomButton type='secundary' text='Volte para a pagina de Registro'></CustomButton>
 
 
-            <CustomButton  type='primary' text='Criar conta' ></CustomButton>
+            <CustomButton onPress={handleSubmit(onConfirmIsPressed)}  type='primary' text='Criar conta' ></CustomButton>
           
       
 
@@ -60,6 +79,7 @@ const ConfirmLogin = () => {
     </ScrollView>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -132,4 +152,4 @@ const styles = StyleSheet.create({
     borderRadius:5
 }});
 
-export default ConfirmLogin;
+export default ConfirmLogin

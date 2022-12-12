@@ -16,6 +16,8 @@ const image = require("../../loginImg/loginBackground.png");
 import CustomImput2 from "./RegisterValues";
 import {useNavigation} from "@react-navigation/native"
 import {useForm,Controller} from 'react-hook-form'
+import { Auth } from "aws-amplify";
+import { Alert } from "react-native";
 
 const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 
@@ -23,16 +25,26 @@ const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 const Register = () => {
   const navigation=useNavigation()
   const {control,handleSubmit,formState:{errors}, watch}= useForm();
-  const psw=watch('userPassword')
+  const psw=watch('password')
   
-  const onRegisterIsPressed = (data) =>{
-     
-    console.warn(data);
-    navigation.navigate('ConfirmLogin');
+  const onRegisterIsPressed = async (data) =>{
+    alert('eps')
+     const {username,password,email,name} = data
+   try {
+    await Auth.signUp({
+      
+      username,
+      password,
+      attributes:{email,name,preferred_username:username}
+    })
+      navigation.navigate('ConfirmLogin',{username})    
+   } catch (error) {
+      alert(error)
+   }
     
   }
 
-  const onTermsOfUse=()=>{
+  const onTermsOfUse= async()=> {
     return console.warn("termo");
   }
 
@@ -55,7 +67,7 @@ const Register = () => {
           <CustomImput2 rules={{required:'O nome do usuario é obrigatorio',minLength:{value:10,message:'nome deve ter no minimo 10 caracteres'},}} placeholder="digite seu nome" name="name" control={control}  placeholderTextColor="#fff"></CustomImput2>
 
           
-          <CustomImput2 rules={{required:'O nome do usuario é obrigatorio',minLength:{value:10,message:'nome deve ter no minimo 10 caracteres'},}} placeholder="digite seu nome de usuario" name="userName" control={control}  placeholderTextColor="#fff"></CustomImput2>
+          <CustomImput2 rules={{required:'O nome do usuario é obrigatorio',minLength:{value:10,message:'nome deve ter no minimo 10 caracteres'},}} placeholder="digite seu nome de usuario" name="username" control={control}  placeholderTextColor="#fff"></CustomImput2>
 
           <CustomImput2 rules={{required:'O email do usuario é obrigatorio',minLength:{value:10,message:'Email deve ter no minimo 10 caracteres'},pattern:{value:reg,message:'email invalido'}}} placeholder="digite seu email" name="email" control={control}  placeholderTextColor="#fff"></CustomImput2>
 
